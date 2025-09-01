@@ -118,6 +118,3 @@ test.ipynb
 # Database data.
 *.db
 *.sqlite
-
-# Reference text files.
-*.txt
