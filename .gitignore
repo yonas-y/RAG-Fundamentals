@@ -1,0 +1,123 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.idea/                # PyCharm
+.vscode/              # VS Code
+.history/             # VS Code extension
+*.code-workspace      # VS Code workspace files
+
+# VS Code remote/server folders
+.vscode-test/
+.vscode-remote/
+.vscode-server/
+.vscode-oss/
+.vscode-insiders/
+.vscode-exploration/
+.vscode-custom/
+.vscode-extensions/
+.vscode-local/
+.vscode-backup/
+.vscode-logs/
+.vscode-sftp.json
+.vscode-ssh.json
+.vscode-tunnel.json
+.vscode-remote.json
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/*.code-snippets
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+test_notebook.ipynb
+
+# Jupyter runtime
+~$*
+
+# IPython history
+.history
+
+# Environment variables / secrets
+.env
+*.env
+
+# Log files
+*.log
+
+# SQLite database
+*.sqlite3
+
+# Mac system files
+.DS_Store
+
+# Jupyter runtime
+~$*
+*.nbconvert.ipynb
+
+# pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Profiling
+.prof
+
+# Test outputs
+test_output/
+output/
+
+# Test Jupyter Script!!
+/output
+/data
+/saved_model_artifact
+launchers/
+configs/
+test.ipynb
+
+# Database data.
+*.db
+*.sqlite
+
+# Reference text files.
+*.txt
