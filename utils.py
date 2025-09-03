@@ -1,4 +1,5 @@
 from pathlib import Path
+from google.cloud import aiplatform
 
 def load_documents(directory: str, encoding: str = "utf-8") -> list[dict]:
     documents = []
@@ -63,3 +64,43 @@ def chunk_documents(
             })
 
     return chunked_docs
+
+
+def embed_chunks(
+        chunks: list[dict], 
+        embedding_model: str = "textembedding-gecko@001", 
+        location: str = "us-central1", 
+        project: str = None) -> list[dict]:
+    """
+    Generate embeddings for a list of chunk dicts using Vertex AI.
+    
+    Args:
+        chunks: List of dicts with at least 'content' key.
+        embedding_model: Vertex AI embedding model name.
+        location: Vertex AI region.
+        project: Google Cloud project ID (optional, uses default if None).
+    
+    Returns:
+        List of dicts, each with original metadata + 'embedding' vector.
+    """
+    aiplatform.init(project=project, location=location)
+    embeddings_client = aiplatform.gapic.PredictionServiceClient()
+
+    embedded_chunks = []
+    endpoint = f"projects/{project}/locations/{location}/publishers/google/models/{embedding_model}/endpoint"
+
+    for chunk in chunks:
+        # Vertex AI expects a list of text inputs
+        response = embeddings_client.predict(
+            endpoint=endpoint,
+            instances=[{"content": chunk["content"]}],
+        )
+        # Extract embedding vector
+        embedding_vector = response.predictions[0]["embedding"]
+
+        # Append embedding to chunk dict
+        new_chunk = chunk.copy()
+        new_chunk["embedding"] = embedding_vector
+        embedded_chunks.append(new_chunk)
+
+    return embedded_chunks
