@@ -108,9 +108,9 @@ test_output/
 output/
 
 # Test Jupyter Script!!
-/output
-/data
-/saved_model_artifact
+output/
+data/
+saved_model_artifact/
 launchers/
 configs/
 test.ipynb
