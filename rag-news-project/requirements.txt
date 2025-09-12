@@ -1,0 +1,8 @@
+google-cloud-aiplatform
+google-cloud-storage
+langchain
+pandas
+numpy
+faiss-cpu      # For local vector DB (or use Pinecone/Weaviate instead)
+fastapi        # For an API endpoint (optional)
+uvicorn
