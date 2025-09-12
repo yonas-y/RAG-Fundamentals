@@ -24,7 +24,6 @@ var/
 *.egg
 
 # Virtual environments
-env/
 venv/
 .venv/
 ENV/
@@ -62,7 +61,6 @@ venv.bak/
 # Jupyter Notebook
 .ipynb_checkpoints/
 *.nbconvert.ipynb
-test_notebook.ipynb
 
 # Jupyter runtime
 ~$*
