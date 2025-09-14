@@ -1,5 +1,6 @@
 from vertexai.language_models import TextEmbeddingModel
 import vertexai
+from app.config import EMBEDDING_MODEL
 
 def get_embedding(text: str, project_id: str, location: str = "us-central1") -> list[float]:
     """
@@ -17,7 +18,7 @@ def get_embedding(text: str, project_id: str, location: str = "us-central1") -> 
     vertexai.init(project=project_id, location=location)
 
    # Load embedding model (Gemini-based)
-    model = TextEmbeddingModel.from_pretrained("text-embedding-004")  # or gemini-embedding-001
+    model = TextEmbeddingModel.from_pretrained(EMBEDDING_MODEL)
 
     # Get embeddings
     embeddings = model.get_embeddings([text])
