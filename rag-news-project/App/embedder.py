@@ -1,7 +1,7 @@
 from vertexai.language_models import TextEmbeddingModel
 import vertexai
 
-def get_embedding(text, project_id, location="us-central1"):
+def get_embedding(text: str, project_id: str, location: str = "us-central1") -> list[float]:
     """
     Generates a text embedding using a Vertex AI model.
 
@@ -16,10 +16,10 @@ def get_embedding(text, project_id, location="us-central1"):
     # Initialize Vertex AI
     vertexai.init(project=project_id, location=location)
 
-    # Initialize the embedding model
-    embedding_model = TextEmbeddingModel.from_pretrained("textembedding-gecko@001")
+   # Load embedding model (Gemini-based)
+    model = TextEmbeddingModel.from_pretrained("text-embedding-004")  # or gemini-embedding-001
 
-    # Get embeddings for the input text
-    embeddings = embedding_model.get_embeddings([text])
+    # Get embeddings
+    embeddings = model.get_embeddings([text])
 
     return embeddings[0].values
