@@ -111,6 +111,7 @@ data/
 saved_model_artifact/
 launchers/
 configs/
+vector_store/
 test.ipynb
 
 # Database data.
