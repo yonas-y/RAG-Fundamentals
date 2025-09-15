@@ -1,26 +1,24 @@
-from vertexai.language_models import TextEmbeddingModel
 import vertexai
-from app.config import EMBEDDING_MODEL
+from vertexai.language_models import TextEmbeddingModel
+from app.config import EMBEDDING_MODEL, PROJECT_ID, LOCATION
 
-def get_embedding(text: str, project_id: str, location: str = "us-central1") -> list[float]:
+def get_embedding(text: str) -> list[float]:
     """
     Generates a text embedding using a Vertex AI model.
 
     Args:
         text (str): The input string to embed.
-        project_id (str): The Google Cloud project ID.
-        location (str): The location of the model (e.g., "us-central1").
 
     Returns:
         A list of floats representing the embedding vector.
     """
     # Initialize Vertex AI
-    vertexai.init(project=project_id, location=location)
+    vertexai.init(project=PROJECT_ID, location=LOCATION)
 
    # Load embedding model (Gemini-based)
     model = TextEmbeddingModel.from_pretrained(EMBEDDING_MODEL)
 
     # Get embeddings
-    embeddings = model.get_embeddings([text])
+    embeddings = model.get_embeddings([text])[0].values
 
-    return embeddings[0].values
+    return embeddings
