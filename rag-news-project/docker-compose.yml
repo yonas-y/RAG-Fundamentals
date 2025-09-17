@@ -1,0 +1,13 @@
+# version: "3.9"
+
+services:
+  rag-api:
+    build: .
+    container_name: rag_fastapi
+    ports:
+      - "8000:8010"   # Map container port -> host port
+    volumes:
+      - ./data:/app/data   # persist FAISS index + docs outside container
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/keys/rag-fundamentals-471014.json
+    restart: unless-stopped
