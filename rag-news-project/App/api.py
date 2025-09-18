@@ -13,7 +13,6 @@ app = FastAPI(title="RAG News API", version="1.0")
 # Load or build vector store at startup
 vs = None
 
-
 @app.on_event("startup")
 def startup_event():
     global vs
@@ -47,3 +46,27 @@ def query_rag(request: QueryRequest):
 @app.get("/health")
 def health_check():
     return {"status": "ok", "vector_store_loaded": vs is not None}
+
+
+@app.post("/rebuild")
+def rebuild_vector_store():
+    """
+    Rebuild the vector store from the data directory on demand.
+    Replaces the in-memory store and saves the new store to disk.
+    """
+    global vs
+    try:
+        print("🔁 Rebuilding vector store...")
+        documents = load_documents(doc_dir_path)
+        chunks = chunk_documents(documents)
+        new_vs = VectorStore(dim=768)
+        for chunk in chunks:
+            embedding = get_embedding(chunk.page_content)
+            new_vs.add(embedding, chunk.page_content)
+        new_vs.save()
+        vs = new_vs
+        print(f"✅ Rebuilt vector store with {len(chunks)} chunks.")
+        return {"status": "ok", "message": "Vector store rebuilt", "num_chunks": len(chunks)}
+    except Exception as e:
+        print(f"❌ Error rebuilding vector store: {e}")
+        return {"status": "error", "message": str(e)}
